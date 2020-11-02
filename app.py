@@ -1,9 +1,10 @@
 from flask import Flask
-from flask import render_template, request
+from flask import render_template, request, redirect
+
 
 app = Flask(__name__)
 
-import math
+
 
 class Tank():
     def __init__(self, radius, height):
@@ -14,10 +15,10 @@ class Tank():
         return "Tank with radius {} ft and height {} ft, will cost ${} total".format(self.radius, self.height, self.totalCost())
         
     def tankTopArea(self):
-        return math.pi * (self.radius ** 2)
+        return 3.14 * (self.radius ** 2)
     
     def tankSideArea(self):
-        return (2 * (math.pi * self.radius)) * self.height
+        return (2 * (3.14 * self.radius)) * self.height
     
     def tankTotalArea(self):
         return self.tankSideArea() + self.tankTopArea()
@@ -53,10 +54,10 @@ def estimate():
         tHeight = float(form['tHeight'])
 
         tank = Tank(tRadius, tHeight)
+        
         tankCost = tank.totalCost()
-        print(tankCost)
 
-        #return render_template('index.html', tankCost=tankCost)
+        return render_template('estimate.html', tankCost=tankCost)
 
     return render_template('estimate.html')
 

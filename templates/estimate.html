@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %} welcome to Aidan's Page {% endblock %}
+{% block title %} Estimator {% endblock %}
 
 
 {% block body %} 
 
 <h1>CREATE AN ESTIMATE</h1>
 
-<form>
-    <label for="fname">Tank Radius:</label><br>
-    <input type="text" id="tRadius" name="tRadius"><br>
-    <label for="lname">Tank Height:</label><br>
-    <input type="text" id="tHeight" name="tHeight"><br>
+<form action="/estimate" method="POST">
+    <label for="tRadius">Tank Radius:</label><br>
+    <input type="number" id="tRadius" name="tRadius" placeholder="Radius in feet" min="0" step=".01" autofocus required><br>
+    <label for="tHeight">Tank Height:</label><br>
+    <input type="number" id="tHeight" name="tHeight" placeholder="Height in feet" min="0" step=".01" required><br>
     <br>
     <input type="submit" value="submit">
 </form>
+
+{% if tankCost %}
+    <h3>Tank Cost: {{tankCost}}</h3>
+{% endif %} 
 
 
 {% endblock %}
